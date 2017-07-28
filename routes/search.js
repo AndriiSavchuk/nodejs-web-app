@@ -8,7 +8,6 @@ const render = require('../lib/render');
 function search(req, res) {
   const parseUrl = url.parse(req.url, true); // if true then we get object, without -> String
 
-
   omdb.get(title, (error, movie) => {
     if (error) {
       return render('error.html', { error: error.message }, (error, html) => {

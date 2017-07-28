@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function public(req, res){
+function public(req, res) {
   const extension = path.extname(req.url); // /css/app.css -> .css
   const filename = req.url.slice(1); // /css/app.css -> css/app.css
   let contentType = '';
@@ -21,7 +21,7 @@ function public(req, res){
       break;
     default:
       contentType = 'text/plain';
-  }
+    }
 
   res.statusCode = 200;
   res.setHeader('Content-Type', contentType);
@@ -31,7 +31,7 @@ function public(req, res){
 
   stream.pipe(res);
   stream.on('error', error => {
-    if(error.code === 'ENOENT') {
+    if (error.code === 'ENOENT') {
       console.log(error);
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not found');
